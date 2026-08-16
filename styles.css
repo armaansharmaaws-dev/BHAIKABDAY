@@ -41,7 +41,7 @@ button {
 }
 
 .screen.active {
-    display: flex;
+    display: flex !important;
     animation: pageIn 0.7s ease;
 }
 
@@ -834,4 +834,156 @@ h3 {
 
 .music-toggle:active {
     transform: scale(0.92);
+}
+/* ============================================
+   🌙 MOON SECTION
+============================================ */
+
+.moon-content {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* -------------------------------
+   TWO MOONS
+-------------------------------- */
+
+.moons-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 70px;
+    width: 100%;
+    margin: 35px auto 40px;
+}
+
+
+/* -------------------------------
+   EACH MOON
+-------------------------------- */
+
+.moon-card {
+    width: 280px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+
+/* -------------------------------
+   IMAGE WINDOW
+-------------------------------- */
+
+.moon-image-wrapper {
+    width: 240px;
+    height: 205px;
+    margin: 0 auto 18px;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+
+/* -------------------------------
+   MOON IMAGE
+-------------------------------- */
+
+.moon-image {
+    width: 240px;
+    height: 240px;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: top;
+}
+
+
+/* -------------------------------
+   DATE
+-------------------------------- */
+
+.moon-date {
+    margin: 15px 0 8px;
+
+    font-weight: 600;
+}
+
+
+/* -------------------------------
+   DESCRIPTION
+-------------------------------- */
+
+.moon-caption {
+    margin: 0;
+
+    line-height: 1.6;
+}
+
+
+/* -------------------------------
+   MESSAGE CARD
+-------------------------------- */
+
+.moon-message {
+    width: 100%;
+    max-width: 560px;
+
+    margin: 20px auto 35px;
+
+    box-sizing: border-box;
+}
+
+
+/* -------------------------------
+   BUTTON
+-------------------------------- */
+
+.moon-next-button {
+    display: block;
+
+    margin: 0 auto;
+}
+
+
+/* ============================================
+   📱 MOBILE
+============================================ */
+
+@media (max-width: 700px) {
+
+    .moons-container {
+        flex-direction: column;
+        align-items: center;
+
+        gap: 45px;
+    }
+
+    .moon-card {
+        width: 280px;
+    }
+
+    .moon-message {
+        width: 90%;
+    }
+
+}
+/* EMERGENCY VISIBILITY FIX */
+.screen.active {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+}
+
+.screen.active .content {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
 }

@@ -1,39 +1,23 @@
 /* ==================================================
    SCREEN NAVIGATION
 ================================================== */
-
 function nextScreen(currentId, nextId) {
-
-    const current =
-        document.getElementById(currentId);
-
-    const next =
-        document.getElementById(nextId);
+    const current = document.getElementById(currentId);
+    const next = document.getElementById(nextId);
 
     if (!current || !next) {
-        console.error(
-            "Screen missing:",
-            currentId,
-            nextId
-        );
+        console.error("Screen missing:", currentId, nextId);
         return;
     }
 
     current.classList.remove("active");
+    next.classList.add("active");
 
-    setTimeout(() => {
-
-        next.classList.add("active");
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    }, 250);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
-
-
 
 /* ==================================================
    FLOATING HEARTS
@@ -136,38 +120,42 @@ const quizMessage =
    FUNNY HINGLISH MESSAGES
 ================================================== */
 
-const funnyMessages = [
+const q1WrongMessages = [
+    "Arre arre 😂 itna easy question hai, phir bhi galat option?",
+    "Aapko answer pata hai... bas attitude mein click kar rahi ho 😭😂",
+    "Nice try 👀 lekin button bhi aapse bach gaya 😂",
+    "haar maan lo 😭😂",
+    "Aapko kya laga, ye button pakad mein aa jayega? 😂",
+    "Wrong option ke peeche itna pyaar kyun hai? 👀😂",
+    "Aap answer dene aayi ho ya button pakadne? 😭😂",
+    "Button: 'Mujhe nahi pakad sakti' 😂",
+    "Thoda dimag lagaiye madam 😭😂❤️",
+    "Aapko bas ek kaam karna hai... sahi answer choose karna 😂",
+    "Ye option aapko choose nahi karne wala... dekha? Bhaag gaya 😂",
+    "Aapki determination ko salute hai 🫡😂",
+    "Itni baar try? Aap haar nahi maanengi, hai na? 😭😂",
+    "Aap aur ye button... kya hi love story chal rahi hai 😂",
+    "Wrong answer ki taraf itna attraction kyun? 👀😂",
+    "Okay okay 😂 ab toh maan jaiye ki ye answer nahi hai."
+];
 
-    "Arre guys 😭 ye answer nahi hai 😂",
-
-    "Guys please 😭 sahi option choose karo.",
-
-    "Vanshikaaa 😂 tumhe pata hai answer kya hai.",
-
-    "Arre guys, cheating nahi chalegi 😭",
-
-    "Ye button tumse door bhaag raha hai 😂",
-
-    "Guys seriously? 👀",
-
-    "Itni bhi kya zid hai guys 😭😂",
-
-    "NOPE. Ye wala option allowed nahi hai 😭",
-
-    "Guys mujhe sab pata hai 👀😂",
-
-    "Bas karo guys 😭",
-
-    "ARMAAN choose karo guys 😂",
-
-    "Nice try 😂 but NO.",
-
-    "Wrong answer se itna pyaar kyun hai? 😭",
-
-    "Guys... tumhe answer already pata hai 😂",
-
-    "Main ye option click nahi hone dunga 😭❤️"
-
+const q2KoiAurMessages = [
+    "Koi aur? 😭 Aap seriously mera dil todne wali ho kya?",
+    "Aapko bhi pata hai answer kya hai... bas maan nahi rahe 😂❤️",
+    "Koi aur ka option dekh ke hi dil dukhi ho gaya 🥺😂",
+    "Aap itna bhi confuse mat ho... mera dil already answer jaanta hai 😭❤️",
+    "Koi aur? 🥺 Ye dekh ke toh button bhi bhaag gaya 😂",
+    "Aapko ek simple sa answer dena tha... itna emotional damage kyun 😭😂",
+    "Please aisa mat kijiye... mera dil bohot sensitive hai 🥺❤️",
+    "Aapko sach mein lagta hai koi aur? 😭 Ye toh personal ho gaya 😂",
+    "Koi aur choose karne ki koshish? 👀 Main ye accept nahi karunga 😭❤️",
+    "Aapko pata hai correct answer kya hai... bas thoda drama chal raha hai 😂",
+    "Nahi nahi... aap ye option choose nahi kar sakte 😭😂",
+    "Mera dil keh raha hai aap jaan-boojh ke mujhe pareshan kar rahi ho 🥺❤️",
+    "Aapka ye answer dekh kar system bhi emotional ho gaya 😭😂",
+    "Koi aur? 🥺 Aapko mujh par thoda toh taras kijiye ❤️",
+    "Itna ignore bhi mat kijiye... dil hai, WiFi router nahi 😭😂❤️",
+    "Last warning 😭❤️ Aapko pata hai dil ka correct answer kya hai."
 ];
 
 
@@ -179,28 +167,48 @@ const funnyMessages = [
 function moveWrongButton(event) {
 
     if (event) {
-
         event.preventDefault();
         event.stopPropagation();
-
     }
-
 
     wrongAttempts++;
 
 
-    const messageIndex =
-        (wrongAttempts - 1)
-        % funnyMessages.length;
+    /* =========================
+       QUESTION 1 MESSAGE
+    ========================= */
+
+    if (questionNumber === 1) {
+
+        const messageIndex =
+            (wrongAttempts - 1) %
+            q1WrongMessages.length;
+
+        quizMessage.textContent =
+            q1WrongMessages[messageIndex];
+
+    }
 
 
-    quizMessage.textContent =
-        funnyMessages[messageIndex];
+    /* =========================
+       QUESTION 2 MESSAGE
+    ========================= */
+
+    else if (questionNumber === 2) {
+
+        const messageIndex =
+            (wrongAttempts - 1) %
+            q2KoiAurMessages.length;
+
+        quizMessage.textContent =
+            q2KoiAurMessages[messageIndex];
+
+    }
 
 
-    /*
-        Move it anywhere on screen.
-    */
+    /* =========================
+       MOVE BUTTON
+    ========================= */
 
     const padding = 20;
 
@@ -214,7 +222,6 @@ function moveWrongButton(event) {
         wrongButton.offsetHeight -
         padding;
 
-
     const randomX =
         padding +
         Math.random() *
@@ -223,7 +230,6 @@ function moveWrongButton(event) {
             1
         );
 
-
     const randomY =
         padding +
         Math.random() *
@@ -231,7 +237,6 @@ function moveWrongButton(event) {
             maxY - padding,
             1
         );
-
 
     wrongButton.style.position =
         "fixed";
@@ -244,7 +249,6 @@ function moveWrongButton(event) {
 
     wrongButton.style.zIndex =
         "99999";
-
 }
 
 
@@ -406,12 +410,11 @@ function showSecondQuestion() {
 /* ==================================================
    FINISH QUIZ
 ================================================== */
-
 function finishQuiz() {
 
     nextScreen(
         "quiz",
-        "passed"
+        "moon"
     );
 
 }
