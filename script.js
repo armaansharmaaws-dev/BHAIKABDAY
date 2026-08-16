@@ -415,3 +415,17 @@ function finishQuiz() {
     );
 
 }
+function toggleMusic() {
+    const music = document.getElementById("bgMusic");
+    const button = document.getElementById("musicToggle");
+
+    if (music.paused) {
+        music.play();
+        button.textContent = "🎵";
+        button.setAttribute("aria-label", "Pause music");
+    } else {
+        music.pause();
+        button.textContent = "💗";
+        button.setAttribute("aria-label", "Play music");
+    }
+}
